@@ -26,3 +26,36 @@ jobs:
           RCLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           cat .env
+          
+      - name: "Login to docker hub"     
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} 
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: "Build docker image"
+        uses: okteto/build@master
+        with:
+          tag: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.HEROKU_APP_NAME }}:latest
+      
+      - name: " make new docker file"
+        env:
+         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }} 
+        run: |
+         rm *
+         cat > Dockerfile << EOF
+         FROM ${HEROKU_APP_NAME}:latest
+         ENV PORT=8080
+         EXPOSE 8080
+         CMD ["bash", "start.sh"]
+         EOF
+         cat Dockerfile
+         
+      - uses: akhileshns/heroku-deploy@v3.6.8  # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          branch: master
+          usedocker: true
+         
