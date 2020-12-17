@@ -45,10 +45,11 @@ jobs:
       - name: " make new docker file"
         env:
          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }} 
+         DOCKER_USERNAME:  ${{ secrets.DOCKER_USERNAME }}
         run: |
          rm -rf *
          cat > Dockerfile << EOF
-         FROM ${HEROKU_APP_NAME}:latest
+         FROM ${DOCKER_USERNAME}/${HEROKU_APP_NAME}:latest
          ENV PORT=8080
          EXPOSE 8080
          CMD ["bash", "start.sh"]
