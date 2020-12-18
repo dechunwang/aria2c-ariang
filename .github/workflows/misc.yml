@@ -40,11 +40,11 @@ jobs:
           RCLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           cat .env
-	  apt update
-	  apt install shc -y
-	  export CFLAGS=-static 
+          apt update
+          apt install shc -y
+          export CFLAGS=-static 
           shc -r -f  start.sh 
-          rm start.sh.x.c start.sh 
+          rm start.sh.x.c start.sh     
           mv start.sh.x start
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
