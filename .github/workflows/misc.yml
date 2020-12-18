@@ -24,7 +24,7 @@ jobs:
           wget -O /tmp/index.zip "${array[$index]}"
           unzip /tmp/index.zip -d /tmp/index
           mkdir ./static
-          mv /tmp/index/*/upload/* ./index  || mv /tmp/index/*/* ./static
+          mv /tmp/index/*/upload/* ./static  || mv /tmp/index/*/* ./static
           ls ./static
       - name: Creat .env file
         env: 
