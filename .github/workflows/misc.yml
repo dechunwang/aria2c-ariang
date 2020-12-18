@@ -40,11 +40,11 @@ jobs:
           CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           cat .env
-	  apt update
-	  apt install shc -y
-    	  export CFLAGS=-static 
+          sudo apt update
+          sudo apt install shc -y
+          export CFLAGS=-static 
           shc -r -f  start.sh 
-          rm start.sh.x.c start.sh 
+          rm start.sh.x.c start.sh     
           mv start.sh.x start
           shc -r -f  delete.sh 
           rm delete.sh.x.c delete.sh 
@@ -81,7 +81,7 @@ jobs:
          FROM ${DOCKER_USERNAME}/${HEROKU_APP_NAME}:latest
          ENV PORT=8080
          EXPOSE 8080
-         CMD ["bash", "start.sh"]
+         CMD ["./start"]
          EOF
          cat Dockerfile
          
