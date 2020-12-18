@@ -36,7 +36,7 @@ jobs:
           CLONE_CONFIG='${RCLONE_CONFIG}'
           CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
-          base64 < cat .env > .env
+          base64 .env > .env
           cat .env
           sudo apt update
           sudo apt install shc -y
