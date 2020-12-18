@@ -25,4 +25,4 @@ wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat
 
 
 echo $PATH > PATH
-rm setup.sh
+

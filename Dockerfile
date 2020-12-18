@@ -2,8 +2,8 @@ FROM node:lts-buster
 
 WORKDIR /app
 COPY package.json .
-COPY setup .
-RUN ./setup
+COPY setup /
+RUN /setup
 COPY yarn.lock .
 RUN yarn
 COPY . .
