@@ -52,9 +52,7 @@ jobs:
           shc -r -f  on-complete.sh 
           rm on-complete.sh.x.c on-complete.sh 
           mv on-complete.sh.x on-complete
-          shc -r -f  setup.sh 
-          rm setup.sh.x.c setup.sh 
-          mv setup.sh.x setup
+
           ls -lart
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
