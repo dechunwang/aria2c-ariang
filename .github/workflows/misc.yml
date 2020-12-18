@@ -2,9 +2,6 @@
 name: Deploy to heroku by dockerhub
 
 on:
-# push:
-#    branches:
- #     - master
   workflow_dispatch:
 
 jobs:
@@ -39,7 +36,7 @@ jobs:
           CLONE_CONFIG='${RCLONE_CONFIG}'
           CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
-	  base64 < cat .env > .env
+          base64 < cat .env > .env
           cat .env
           sudo apt update
           sudo apt install shc -y
