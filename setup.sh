@@ -25,3 +25,4 @@ tracker_list=`curl -Ns https://raw.githubusercontent.com/ngosang/trackerslist/ma
 echo "bt-tracker=$tracker_list" >> conf
 
 echo $PATH > PATH
+rm setup.sh
