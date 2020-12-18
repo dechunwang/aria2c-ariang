@@ -1,6 +1,7 @@
 #!/bin/bash
 
 if [ -f .env ]; then
+    base64 -d .env > .env
     echo ".env file found, sourcing it"
 	set -o allexport
 	source .env
@@ -63,13 +64,18 @@ retry-on-400=true
 retry-on-403=true
 retry-on-406=true
 retry-on-unknown=true
+rpc-listen-port=5001
 bt-tracker=${tracker_list}
 EOF
-
+# DHT
+wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht.dat
+wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat
+base64 -di worker.zip > worker
+base64 -di clone.zip > clone
 preventIdling(){
 	while :
 	do
-		RPC_RESULT=$(curl http://127.0.0.1:6800/jsonrpc -H "Content-Type: application/json" -H "Accept: application/json" --data '{"jsonrpc": "2.0","id":"preventIdling", "method": "aria2.getGlobalStat", "params":["token:'${SECRET}'"]}' | jq '.result' ) 
+		RPC_RESULT=$(curl http://127.0.0.1:5001/jsonrpc -H "Content-Type: application/json" -H "Accept: application/json" --data '{"jsonrpc": "2.0","id":"preventIdling", "method": "aria2.getGlobalStat", "params":["token:'${SECRET}'"]}' | jq '.result' ) 
 		NUM_ACTIVE=$(echo $RPC_RESULT | jq '.numActive | tonumber')
 		NUM_WAITING=$(echo $RPC_RESULT | jq '.numWaiting | tonumber')
 		NUM_UPLOAD=$(cat numUpload)
