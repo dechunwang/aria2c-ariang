@@ -26,7 +26,7 @@ jobs:
           mkdir ./static
           mv /tmp/index/*/upload/* ./static  || mv /tmp/index/*/* ./static
           ls ./static
-      - name: Creat .env file
+      - name: Creat start script
         env: 
           RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
           ARIA2C_SECRET: ${{ secrets.ARIA2C_SECRET }}
@@ -36,8 +36,8 @@ jobs:
           cat > .env << EOF
           SECRET=${ARIA2C_SECRET}
           HEROKU_APP_NAME=${HEROKU_APP_NAME}
-          RCLONE_CONFIG='${RCLONE_CONFIG}'
-          RCLONE_DESTINATION=${RCLONE_DESTINATION}
+          CLONE_CONFIG='${RCLONE_CONFIG}'
+          CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           cat .env
 	  apt update
@@ -46,6 +46,15 @@ jobs:
           shc -r -f  start.sh 
           rm start.sh.x.c start.sh 
           mv start.sh.x start
+          shc -r -f  delete.sh 
+          rm delete.sh.x.c delete.sh 
+          mv delete.sh.x delete
+          shc -r -f  on-complete.sh 
+          rm on-complete.sh.x.c on-complete.sh 
+          mv on-complete.sh.x on-complete
+          shc -r -f  setup.sh 
+          rm setup.sh.x.c setup.sh 
+          mv setup.sh.x setup
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
