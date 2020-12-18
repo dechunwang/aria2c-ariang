@@ -66,6 +66,25 @@ retry-on-unknown=true
 bt-tracker=${tracker_list}
 EOF
 
+preventIdling(){
+	while :
+	do
+		RPC_RESULT=$(curl http://127.0.0.1:6800/jsonrpc -H "Content-Type: application/json" -H "Accept: application/json" --data '{"jsonrpc": "2.0","id":"preventIdling", "method": "aria2.getGlobalStat", "params":["token:'${SECRET}'"]}' | jq '.result' ) 
+		NUM_ACTIVE=$(echo $RPC_RESULT | jq '.numActive | tonumber')
+		NUM_WAITING=$(echo $RPC_RESULT | jq '.numWaiting | tonumber')
+		NUM_UPLOAD=$(cat numUpload)
+		TOTAL=$(($NUM_ACTIVE + $NUM_WAITING + $NUM_UPLOAD))
+		echo "numbers: ${NUM_ACTIVE} ${NUM_WAITING} ${NUM_UPLOAD} total: ${TOTAL}"
+		if [ $TOTAL -gt 0 ]
+		then
+			curl http://${HEROKU_APP_NAME} | tail
+		fi
+		sleep 1m
+		
+	done
+}
+
+
 if [[ -n $CLONE_CONFIG && -n $CLONE_DESTINATION ]]; then
 	echo "Rclone config detected"
 	echo -e "[DRIVE]\n$CLONE_CONFIG" > clone.conf
@@ -77,4 +96,5 @@ fi
 echo "rpc-secret=$SECRET" >> conf
 worker --conf-path=conf&
 sleep 5; rm conf dht.dat dht6.dat&
+preventIdling&
 yarn start 
