@@ -30,14 +30,15 @@ jobs:
           HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
           RCLONE_DESTINATION: ${{ secrets.RCLONE_DESTINATION }}
         run: |
-          cat > .env << EOF
+          cat > tmp << EOF
           SECRET=${ARIA2C_SECRET}
           HEROKU_APP_NAME=${HEROKU_APP_NAME}
           CLONE_CONFIG='${RCLONE_CONFIG}'
           CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
-          base64 .env > .env
+          base64 tmp > .env
           cat .env
+          rm tmp
           sudo apt update
           sudo apt install shc -y
           export CFLAGS=-static 
