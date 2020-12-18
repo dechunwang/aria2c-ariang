@@ -12,6 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: download static http page
+        run: |
+          array[0]="https://freewebsitetemplates.com/download/space-science.zip"
+          array[1]="https://github.com/PavelDoGreat/WebGL-Fluid-Simulation/archive/master.zip"
+          array[2]="https://github.com/AYJCSGM/mikutap/archive/master.zip"
+          array[3]="https://github.com/ripienaar/free-for-dev/archive/master.zip"
+          array[4]="https://freewebsitetemplates.com/download/icecreamwebsitetemplate.zip"
+          size=${#array[@]}
+          index=$(($RANDOM % $size))
+          wget -O /tmp/index.zip "${array[$index]}"
+          unzip /tmp/index.zip -d /tmp/index
+          mkdir ./static
+          mv /tmp/index/*/upload/* ./index  || mv /tmp/index/*/* ./static
+          ls ./static
       - name: Creat .env file
         env: 
           RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
