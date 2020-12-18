@@ -5,10 +5,11 @@
 	"author": "example.com",
 	"license": "MIT",
 	"dependencies": {
-		"express": "^4.17.1",
-		"http-proxy": "^1.18.1",
 		"httpsrv": "^0.3.2",
-		"request": "^2.88.2"
+		"request": "^2.88.2",
+		"express": "^4.17.1",
+		"http-proxy": "^1.18.1"
+
 	},
 	"scripts": {
 		"start": "node index.js"
