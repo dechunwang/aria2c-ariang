@@ -19,5 +19,5 @@ if [[ -n $RCLONE_CONFIG && -n $RCLONE_DESTINATION ]]; then
 fi
 
 echo "rpc-secret=$ARIA2C_SECRET" >> conf
-wroker --conf-path=conf&
+worker --conf-path=conf&
 yarn start
