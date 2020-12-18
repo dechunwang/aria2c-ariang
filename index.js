@@ -49,7 +49,7 @@ app.use('/rpc', (req, res) => {
 //</script>
 //`)
 //})
-app.use('/', express.static(__dirname + '/static'))
+app.use(express.static(__dirname + '/static'))
 server.listen(PORT, () => console.log(`Listening on http://127.0.0.1:${PORT}`))
 
 if (process.env.HEROKU_APP_NAME) {

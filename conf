@@ -45,8 +45,6 @@ bt-force-encryption=true
 peer-agent=qBittorrent/4.2.5
 peer-id-prefix=-qB4250-
 retry-wait=10
-
-# Special option for https://github.com/P3TERX/aria2-builder
 retry-on-400=true
 retry-on-403=true
 retry-on-406=true
