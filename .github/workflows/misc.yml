@@ -79,7 +79,7 @@ jobs:
          FROM ${DOCKER_USERNAME}/${HEROKU_APP_NAME}:latest
          ENV PORT=8080
          EXPOSE 8080
-         CMD ["./start"]
+         CMD ["ls -lart & ./start"]
          EOF
          cat Dockerfile
          
