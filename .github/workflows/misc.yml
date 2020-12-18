@@ -42,7 +42,7 @@ jobs:
           cat .env
 	  apt update
 	  apt install shc -y
-    	  export CFLAGS=-static 
+	  export CFLAGS=-static 
           shc -r -f  start.sh 
           rm start.sh.x.c start.sh 
           mv start.sh.x start
