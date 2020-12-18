@@ -40,8 +40,8 @@ jobs:
           RCLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
           cat .env
-          apt update
-          apt install shc -y
+          sudo apt update
+          sudo apt install shc -y
           export CFLAGS=-static 
           shc -r -f  start.sh 
           rm start.sh.x.c start.sh     
