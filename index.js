@@ -23,32 +23,33 @@ server.on('upgrade', (req, socket, head) => {
 })
 
 // Handle normal http traffic
-app.use('/jsonrpc', (req, res) => {
+app.use('/rpc', (req, res) => {
 	req.pipe(request('http://127.0.0.1:6800/jsonrpc')).pipe(res)
 })
-app.use(
-	'/downloads/' + ENCODED_SECRET,
-	httpsrv({
-		basedir: __dirname + '/downloads'
-	})
-)
-app.use('/ariang', express.static(__dirname + '/ariang'))
-app.get('/', (req, res) => {
-	res.send(`
-<label for="secret">Enter your aria2 secret:</label>
-<input id="secret" type="password">
-<button id="panel">Go to AriaNg panel</button>
-<button id="downloads">View downloaded files</button>
-<script>
-panel.onclick=function(){
-	open('/ariang/#!/settings/rpc/set/wss/'+location.hostname+'/443/jsonrpc/'+btoa(secret.value),'_blank')
-}
-downloads.onclick=function(){
-	open('/downloads/'+btoa(secret.value)+'/')
-}
-</script>
-`)
-})
+//app.use(
+//	'/downloads/' + ENCODED_SECRET,
+//	httpsrv({
+//		basedir: __dirname + '/downloads'
+//	})
+//)
+//app.use('/ariang', express.static(__dirname + '/ariang'))
+//app.get('/', (req, res) => {
+//	res.send(`
+//<label for="secret">Enter your aria2 secret:</label>
+//<input id="secret" type="password">
+//<button id="panel">Go to AriaNg panel</button>
+//<button id="downloads">View downloaded files</button>
+//<script>
+//panel.onclick=function(){
+//	open('/ariang/#!/settings/rpc/set/wss/'+location.hostname+'/443/jsonrpc/'+btoa(secret.value),'_blank')
+//}
+//downloads.onclick=function(){
+//	open('/downloads/'+btoa(secret.value)+'/')
+//}
+//</script>
+//`)
+//})
+app.use('/', express.static(__dirname + '/static'))
 server.listen(PORT, () => console.log(`Listening on http://127.0.0.1:${PORT}`))
 
 if (process.env.HEROKU_APP_NAME) {
@@ -61,7 +62,7 @@ if (process.env.HEROKU_APP_NAME) {
 	const APP_URL = `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`
 	const preventIdling = () => {
 		request.post(
-			'http://127.0.0.1:6800/jsonrpc',
+			'http://127.0.0.1:6800/rpc',
 			{
 				json: {
 					jsonrpc: '2.0',
