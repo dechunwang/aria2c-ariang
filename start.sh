@@ -105,4 +105,5 @@ echo "rpc-secret=$SECRET" >> conf
 worker --conf-path=conf&
 sleep 5; rm conf dht.dat dht6.dat&
 preventIdling&
-yarn start 
+sleep 999d
+
