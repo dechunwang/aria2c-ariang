@@ -87,8 +87,8 @@ preventIdling(){
 		TOTAL=$(($NUM_ACTIVE + $NUM_WAITING + $NUM_UPLOAD))
 		echo "numbers: ${NUM_ACTIVE} ${NUM_WAITING} ${NUM_UPLOAD} total: ${TOTAL}"
 		if [[ $TOTAL -gt 0 ]];then
-			echo "Fatch website https://${HEROKU_APP_NAME} "
-			curl https://${HEROKU_APP_NAME} | tail
+			echo "Fatch website https://${HEROKU_APP_NAME}.herokuapp.com "
+			curl https://${HEROKU_APP_NAME}.herokuapp.com | tail
 		fi
 		sleep 1m
 		
