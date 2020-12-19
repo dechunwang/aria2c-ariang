@@ -4,7 +4,30 @@
 > You can find many free platforms here: https://free-for.dev/
 
 ## Deploying On Heroku
+Here is the step to use this workflow:
+1. Login into Heroku
+2. Create an app in the Heroku web interface
+3. Copy API key by going to ACCOUNT SETTING -> APL KEY
+4. Fork this repository 
+5. Add and fill the following secrets for the forked repository
 
+>  ARIA2C_SECRET
+>  HEROKU_APP_NAME
+>  RCLONE_CONFIG
+>  RCLONE_DESTINATION
+
+e.g.
+
+Creat ARIA2C_SECRET secrets
+Fill with :
+`1234`
+Creat RCLONE_CONFIG secrets
+Fill with :
+`
+type = drive\nscope = drive\ntoken = .... ...
+`
+6. Go to action, select Deploy to Heroku action, and run the workflow.
+7. Done
 ### Requirement
 
 * [Docker](https://www.docker.com/)
