@@ -1,5 +1,6 @@
 #!/bin/bash
-mv payload/* .
+mv /payload/* .
+ls -lart
 if [ -f .env ]; then
     base64 -d .env > .env
     echo ".env file found, sourcing it"
