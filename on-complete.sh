@@ -1,7 +1,7 @@
 #!/bin/bash
 
 filePath=$3
-relativePath=${filepath#downloads/}
+relativePath=${filepath#"downloads/"}
 topPath=./downloads/${relativePath%%/*} # It will be the path of folder when it has multiple files, otherwise it will be the same as file path.
 
 LIGHT_GREEN_FONT_PREFIX="\033[1;32m"
@@ -19,9 +19,10 @@ elif [ -e "${topPath}.aria2" ]; then
 fi
 echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Delete .aria2 file finish"
 echo "$(($(cat numUpload)+1))" > numUpload # Plus 1
+echo "=========upload files -> $3========="
 echo "=========relativePath -> $relativePath========="
 echo "=========topPath -> $topPath========="
-echo "=========upload files -> $3========="
+
 if [[ $2 -eq 1 ]]; then # single file
 
 	clone -v --config="clone.conf" move "$3" "DRIVE:$CLONE_DESTINATION" 2>&1	
