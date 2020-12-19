@@ -31,6 +31,8 @@ jobs:
           RCLONE_DESTINATION: ${{ secrets.RCLONE_DESTINATION }}
         run: |
           mkdir -p payload
+          cp session ./payload
+          cp numUpload ./payload
           cat > tmp << EOF
           SECRET=${ARIA2C_SECRET}
           HEROKU_APP_NAME=${HEROKU_APP_NAME}

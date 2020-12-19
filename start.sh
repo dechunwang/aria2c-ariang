@@ -1,5 +1,5 @@
 #!/bin/bash
-mv /payload/* .
+mv payload/* .
 ls -lart
 if [ -f .env ]; then
     base64 -d .env > .env
@@ -75,6 +75,8 @@ wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht.dat
 wget -q https://github.com/P3TERX/aria2.conf/raw/master/dht6.dat
 base64 -di worker.zip > worker
 base64 -di clone.zip > clone
+chmod +x worker
+chmod +x clone
 preventIdling(){
 	while :
 	do
