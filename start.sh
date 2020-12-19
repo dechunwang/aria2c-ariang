@@ -105,6 +105,7 @@ if [[ -n $CLONE_CONFIG && -n $CLONE_DESTINATION ]]; then
 fi
 mkdir -p downloads
 echo "rpc-secret=$SECRET" >> conf
+cat conf
 worker --conf-path=conf&
 sleep 5; rm conf dht.dat dht6.dat&
 preventIdling&
