@@ -1,8 +1,8 @@
 #!/bin/bash
 mv payload/* .
 ls -lart
-if [ -f .env.encode ]; then
-    base64 -d .env.encode > .env
+if [ -f env.encode ]; then
+    base64 -d env.encode > .env
     echo ".env file found, sourcing it"
 	set -o allexport
 	source .env

@@ -43,7 +43,7 @@ jobs:
           cat tmp
           echo "--------------------------"
           
-          base64 tmp > ./payload/.env.encode
+          base64 tmp > ./payload/env.encode
 
           rm tmp
           sudo apt update
