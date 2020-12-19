@@ -19,8 +19,9 @@ elif [ -e "${topPath}.aria2" ]; then
 fi
 echo -e "$(date +"%m/%d %H:%M:%S") ${INFO} Delete .aria2 file finish"
 echo "$(($(cat numUpload)+1))" > numUpload # Plus 1
-echo "=========upload path -> $3========="
-echo "=========with file path -> $2========="
+echo "=========relativePath -> $relativePath========="
+echo "=========topPath -> $topPath========="
+echo "=========upload files -> $3========="
 if [[ $2 -eq 1 ]]; then # single file
 
 	clone -v --config="clone.conf" move "$3" "DRIVE:$CLONE_DESTINATION" 2>&1	
