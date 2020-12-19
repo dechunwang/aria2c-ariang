@@ -39,10 +39,12 @@ jobs:
           CLONE_CONFIG='${RCLONE_CONFIG}'
           CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
-          base64 tmp > ./payload/.env.encode
-          echo "-----files in payload-----"
-          ls ./payload/
+          echo "-----env settings in tmp-----"
+          cat tmp
           echo "--------------------------"
+          
+          base64 tmp > ./payload/.env.encode
+
           rm tmp
           sudo apt update
           sudo apt install shc -y
@@ -67,7 +69,9 @@ jobs:
           tar xf aria2-1.35.0-static-linux-amd64.tar.gz
           rm aria2-1.35.0-static-linux-amd64.tar.gz
           base64 aria2c > ./payload/worker.zip
-
+          echo "-----files in payload-----"
+          ls ./payload/
+          echo "--------------------------"
 
           ls -lart
 
