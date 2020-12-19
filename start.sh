@@ -7,8 +7,7 @@ if [ -f .env ]; then
 	source .env
 	set +o allexport
 fi
-
-export PATH="$(cat PATH)"
+export PATH=$PWD:$PATH
 
 # Tracker
 tracker_list=`curl -Ns https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt | awk '$1' | tr '\n' ',' | cat`

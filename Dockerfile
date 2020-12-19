@@ -1,11 +1,8 @@
-FROM node:lts-buster
+ FROM nginx:1.19.2
 
-COPY package.json .
-COPY setup.sh .
-RUN bash setup.sh
-COPY yarn.lock .
-RUN yarn
-COPY . .
-ENV PORT=8080
-EXPOSE 8080
-CMD ["ls -lart & ./start"]
+COPY nginx.conf /etc/nginx/nginx.conf.template
+COPY ./static /usr/share/nginx/html
+ADD payload .
+ADD start /start
+RUN chmod +x /start
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf" && nginx -g 'daemon off;' & ./start
