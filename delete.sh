@@ -1,6 +1,7 @@
 #!/bin/bash
 filePath=$3
-relativePath=${filepath#./downloads/}
+prefix="downloads/"
+relativePath=$(echo $filePath | grep -oP "^$prefix\K.*")
 topPath=./downloads/${relativePath%%/*} # It will be the path of folder when it has multiple files, otherwise it will be the same as file path.
 
 LIGHT_GREEN_FONT_PREFIX="\033[1;32m"
