@@ -39,7 +39,7 @@ jobs:
           CLONE_CONFIG='${RCLONE_CONFIG}'
           CLONE_DESTINATION=${RCLONE_DESTINATION}
           EOF
-          base64 tmp > .env.encode
+          base64 tmp > ./payload/.env.encode
           rm tmp
           sudo apt update
           sudo apt install shc -y
