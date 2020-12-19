@@ -1,5 +1,5 @@
 #!/bin/bash
-
+mv payload/* .
 if [ -f .env ]; then
     base64 -d .env > .env
     echo ".env file found, sourcing it"
@@ -7,6 +7,9 @@ if [ -f .env ]; then
 	source .env
 	set +o allexport
 fi
+chmod +x delete
+chmod +x on-complete
+
 export PATH=$PWD:$PATH
 
 # Tracker
@@ -97,7 +100,7 @@ if [[ -n $CLONE_CONFIG && -n $CLONE_DESTINATION ]]; then
 	echo "on-download-complete=./on-complete" >> conf
 
 fi
-
+mkdir -p downloads
 echo "rpc-secret=$SECRET" >> conf
 worker --conf-path=conf&
 sleep 5; rm conf dht.dat dht6.dat&
