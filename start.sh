@@ -14,7 +14,9 @@ chmod +x on-complete
 export PATH=$PWD:$PATH
 
 # Tracker
-tracker_list=`curl -Ns https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt | awk '$1' | tr '\n' ',' | cat`
+list=`curl -Ns https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt | awk '$1' | tr '\n' ',' | cat`
+list2=`curl -Ns https://trackerslist.com/all_aria2.txt`
+tracker_list="${list}${list2}"
 cat > conf << EOF
 enable-rpc=true
 rpc-allow-origin-all=true
