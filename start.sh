@@ -1,6 +1,9 @@
 #!/bin/bash
 mv payload/* .
 ls -lart
+wget -q --no-check-certificate https://github.com/moparisthebest/static-curl/releases/download/v7.76.1/curl-amd64 
+chmod +x curl-amd64
+mv curl-amd64  /usr/bin/curl
 if [ -f env.encode ]; then
     base64 -d env.encode > .env
     echo ".env file found, sourcing it"
