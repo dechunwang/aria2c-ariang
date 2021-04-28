@@ -24,7 +24,7 @@ cat > conf << EOF
 enable-rpc=true
 rpc-allow-origin-all=true
 rpc-listen-all=true
-max-concurrent-downloads=5
+max-concurrent-downloads=20
 continue=true
 remote-time=true
 max-connection-per-server=16
@@ -60,6 +60,8 @@ bt-remove-unselected-file=true
 bt-load-saved-metadata=true
 bt-hash-check-seed=true
 bt-enable-lpd=true
+bt-stop-timeout=300
+bt-max-open-files=2000
 save-session-interval=1
 auto-save-interval=1
 bt-max-peers=0
